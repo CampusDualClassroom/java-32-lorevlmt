@@ -9,11 +9,15 @@ import java.io.PrintWriter;
 public class Exercise32 {
 
     public static void main(String[] args) {
-
+        printToFile(generateStringToSave(generateUserInputToSave()));
     }
 
     public static String generateStringToSave(String string) {
-
+        if (string == null) {
+            return generateUserInputToSave();
+        } else {
+            return string;
+        }
     }
 
     private static String generateUserInputToSave(){
@@ -28,6 +32,11 @@ public class Exercise32 {
 
     public static void printToFile(String string) {
 
+        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("src/main/resources/data.txt"))) {
+            bw.write(string);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
